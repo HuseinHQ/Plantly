@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     backgroundColor: theme.colorWhite,
+    paddingHorizontal: 12,
   },
   heading: {
     fontSize: 42,
