@@ -46,6 +46,15 @@ Start the development server:
 npx expo start
 ```
 
+## 📥 Download
+
+Get the app on your device:
+
+- **📱 Android (APK)**: [Download APK](https://appho.st/d/Fz3mLsBa)
+- **🍏 iOS (Expo Go)**: [Open in Expo](https://expo.dev/accounts/huseinhk/projects/plantly/builds/86a27d8b-d54e-4c6d-87da-c043e6baa9e3)
+
+> **Note:** iOS users need to install [Expo Go](https://expo.dev/client) to run the app.
+
 🏗️ Contributing
 
 Feel free to fork and contribute! Submit a pull request if you have any improvements or new features.
