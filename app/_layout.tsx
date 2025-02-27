@@ -1,6 +1,21 @@
 import { Stack } from "expo-router";
+import { useEffect } from "react";
+import * as QuickActions from "expo-quick-actions";
+import { Platform } from "react-native";
+import { RouterAction } from "expo-quick-actions/router";
 
 export default function Layout() {
+  useEffect(() => {
+    QuickActions.setItems<RouterAction>([
+      {
+        title: "Add a plant",
+        icon: Platform.OS === "ios" ? "symbol:leaf" : "leaf",
+        id: "0",
+        params: { href: "new" },
+      },
+    ]);
+  }, []);
+
   return (
     <Stack>
       <Stack.Screen

@@ -1,12 +1,13 @@
-import { Link, Redirect, Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 import { theme } from "@/theme";
 import { useUserStore } from "@/store/userStore";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { Pressable } from "react-native";
+import { useQuickActionRouting } from "expo-quick-actions/router";
 
 export default function Layout() {
+  useQuickActionRouting();
+
   const hasFinishedOnboarding = useUserStore(
     (state) => state.hasFinishedOnboarding,
   );

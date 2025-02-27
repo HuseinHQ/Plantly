@@ -26,6 +26,14 @@ export default function PlantDetails() {
     });
   }, [plant?.name, navigation]);
 
+  useEffect(() => {
+    if (params?.action === "water") {
+      if (typeof plantId === "string") {
+        waterPlant(plantId);
+      }
+    }
+  }, [params.action, plantId, waterPlant]);
+
   const handleWaterPlant = () => {
     if (typeof plantId === "string") {
       waterPlant(plantId);
