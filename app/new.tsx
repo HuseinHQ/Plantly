@@ -1,13 +1,26 @@
-import { Text, StyleSheet, TextInput, Alert, View } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  TextInput,
+  Alert,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { theme } from "@/theme";
 import { PlantlyButton } from "@/components/PlantlyButton";
 import { useState } from "react";
 import { PlantlyImage } from "@/components/PlantlyImage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { usePlantsStore } from "@/store/plantsStore";
+import { useRouter } from "expo-router";
+import * as ImagePicker from "expo-image-picker";
 
 export default function NewScreen() {
+  const [imageUri, setImageUri] = useState<string>();
   const [name, setName] = useState<string>();
   const [days, setDays] = useState<string>();
+  const addPlant = usePlantsStore((state) => state.addPlant);
+  const router = useRouter();
 
   const handleSubmit = () => {
     if (!name) {
@@ -28,7 +41,22 @@ export default function NewScreen() {
       );
     }
 
-    console.log("Adding plant", name, days);
+    addPlant({ name, wateringFrequencyDays: Number(days), imageUri });
+    router.back();
+  };
+
+  const handleChooseImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImageUri(result.assets[0].uri);
+    }
+    console.log(JSON.stringify(result, null, ""));
   };
 
   return (
@@ -38,7 +66,9 @@ export default function NewScreen() {
       keyboardShouldPersistTaps="handled"
     >
       <View style={styles.centered}>
-        <PlantlyImage />
+        <TouchableOpacity activeOpacity={0.8} onPress={handleChooseImage}>
+          <PlantlyImage imageUri={imageUri} />
+        </TouchableOpacity>
       </View>
       <Text style={styles.label}>Name</Text>
       <TextInput
@@ -85,5 +115,6 @@ const styles = StyleSheet.create({
   },
   centered: {
     alignItems: "center",
+    marginBottom: 24,
   },
 });
